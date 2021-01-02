@@ -1,7 +1,7 @@
 <template>
   <div style="margin: 0 auto; max-width: 850px">
     <Navbar />
-    <header :numCorrect="numCorrect" :numTotal="numTotal"  />
+    <header />
     <!--Testing with Buefy Carousel-->
     <b-carousel>
       <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
@@ -19,14 +19,16 @@
       :next="next"
       :prev="prev"
       :increment="increment"
+      :numCorrect="numCorrect"
+      :numTotal="numTotal"
     />
     <AppFooter />
   </div>
 </template>
 <script>
-import Navbar from "./Shared/Navbar";
-import AppFooter from "./Shared/AppFooter";
-import QuestionBox from "./Play/QuestionBox";
+import Navbar from "./Shared/Navbar.vue";
+import AppFooter from "./Shared/AppFooter.vue";
+import QuestionBox from "./Play/QuestionBox.vue";
 
 export default {
   computed: {},
@@ -48,7 +50,7 @@ export default {
       questions: [],
       index: 0,
       numCorrect: 0,
-      numTotal: 0
+      numTotal: 0,
     };
   },
   components: {
@@ -61,15 +63,13 @@ export default {
       this.index++;
     },
     prev() {
-      while (this.index > 0) {
-        this.index--;
-      }
+      this.index--;
     },
     increment(isCorrect) {
-        if(isCorrect) {
-            this.numCorrect++
-        }
-        this.numTotal++
+      if (isCorrect) {
+        this.numCorrect++;
+      }
+      this.numTotal++;
     },
     loadApi() {
       fetch("https://opentdb.com/api.php?amount=10&category=26&type=multiple", {

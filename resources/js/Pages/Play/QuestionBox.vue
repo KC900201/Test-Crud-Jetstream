@@ -16,7 +16,7 @@
           <h1 class="title">
             {{ currentQuestion.question }}
           </h1>
-          <!-- <h2 class="subtitle">List of answers</h2> -->
+          <h2 class="subtitle">List of answers</h2>
           <div class="panel list-group">
             <a
               class="panel-block list-group-item centered"
@@ -29,15 +29,15 @@
             </a>
           </div>
           <br />
-          <b-button rounded type="is-primary" @click="submitAnswer"
+          <b-button
+            rounded
+            type="is-primary"
+            @click="submitAnswer"
+            :disabled="isDisabled"
             >Submit</b-button
           >
-          <b-button rounded type="is-white" @click="prev" href="#"
-            >Previous</b-button
-          >
-          <b-button rounded type="is-black" @click="next" href="#"
-            >Next</b-button
-          >
+          <b-button rounded type="is-white" @click="prev">Previous</b-button>
+          <b-button rounded type="is-black" @click="next">Next</b-button>
         </div>
       </div>
     </section>
@@ -53,8 +53,9 @@ export default {
     next: Function,
     prev: Function,
     increment: Function,
+    numCorrect: Number,
+    numTotal: Number,
   },
-  props: ["numCorrect", "numTotal"],
   computed: {
     answers() {
       let answers = [...this.currentQuestion.incorrect_answers];
@@ -63,7 +64,9 @@ export default {
     },
   },
   mounted() {
+    console.log("current questions: ");
     console.log(this.currentQuestion);
+    console.log("shuffled answers: ");
     console.log(this.shuffledAnswers);
     this.boom();
   },
@@ -76,14 +79,17 @@ export default {
   methods: {
     boom(index) {
       this.selectedIndex = index;
-      //   alert('Jibaboom ' + this.selectedIndex);
+      //   alert("Jibaboom " + this.selectedIndex);
     },
     shuffleAnswers() {
       let answers = [
         ...this.currentQuestion.incorrect_answers,
         this.currentQuestion.correct_answer,
       ];
-      this.shuffledAnswers = _.shuffle(answers);
+      this.shuffledAnswers = this._.shuffle(answers);
+    },
+    isDisabled() {
+      return this.selectedIndex === null ? false : true;
     },
     submitAnswer() {
       let isCorrect = false;

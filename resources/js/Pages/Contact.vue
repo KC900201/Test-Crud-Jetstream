@@ -37,8 +37,8 @@
     </div>
 </template>
 <script>
-    import Navbar from './Shared/Navbar';
-    import AppFooter from './Shared/AppFooter';
+    import Navbar from './Shared/Navbar.vue';
+    import AppFooter from './Shared/AppFooter.vue';
 
 
     export default {
