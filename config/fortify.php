@@ -47,7 +47,7 @@ return [
     */
 
     // 'username' => 'email',
-    'username' => 'username',
+    'username' => 'username', // login using username (12/15/2020)
 
     'email' => 'email',
 
@@ -63,6 +63,9 @@ return [
     */
 
     'home' => RouteServiceProvider::HOME,
+    // Add in contact and about page
+    'about' => RouteServiceProvider::ABOUT,
+    'contact' => RouteServiceProvider::CONTACT,
 
     /*
     |--------------------------------------------------------------------------

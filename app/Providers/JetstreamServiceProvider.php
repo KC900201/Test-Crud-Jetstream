@@ -9,7 +9,12 @@ use App\Actions\Jetstream\DeleteUser;
 use App\Actions\Jetstream\UpdateTeamName;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
+use Laravel\Fortify\Fortify;
 
+use App\Models\User;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Hash;
 class JetstreamServiceProvider extends ServiceProvider
 {
     /**

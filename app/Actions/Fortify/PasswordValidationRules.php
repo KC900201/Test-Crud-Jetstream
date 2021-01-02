@@ -13,6 +13,7 @@ trait PasswordValidationRules
      */
     protected function passwordRules()
     {
-        return ['required', 'string', new Password, 'confirmed'];
+        // Change minimum length to 10 (12/15/2020)
+        return ['required', 'string', (new Password)->requireNumeric()->length(6), 'confirmed'];
     }
 }

@@ -9,6 +9,9 @@ use App\Actions\Fortify\UpdateUserProfileInformation;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
 
+// Configure Inertia (12/14/2020)
+use Inertia\Inertia;
+use Illuminate\Http\Request;
 class FortifyServiceProvider extends ServiceProvider
 {
     /**
@@ -32,5 +35,13 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+        // login view -> redirect to own login page
+        Fortify::loginView(function (Request $request) {
+            return Inertia("Auth/Login")->toResponse($request);
+        });
+        Fortify::registerView(function () {
+            return Inertia("Auth/Register");
+        });
+
     }
 }

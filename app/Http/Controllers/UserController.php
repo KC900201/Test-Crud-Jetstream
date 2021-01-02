@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+// use App\Providers\JetstreamServiceProvider;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
-
+use Laravel\Fortify\Fortify;
 class UserController extends Controller
 {
     /**
@@ -55,7 +57,26 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
+        // reroute to index page with success msg
         return redirect()->route('users.index')->with('successMessage', 'Successfully created user!');
+    }
+
+    /**
+     * Authenticate user credentials in login page
+     * and redirect to dashboard page
+    */
+    public function login(Request $request)
+    {
+        // Authenticate user
+        // Fortify::authenticateUsing(function (Request $request) {
+        //     $user = User::where('email', $request->email->first());
+
+        //     if($user &&
+        //         Hash::check($request->password, $user->password)) {
+        //             // return $user;
+        //             return redirect()->route(RouteServiceProvider::HOME)->with('successMessage', 'Login success!');
+        //         }
+        // });
     }
 
     /**
