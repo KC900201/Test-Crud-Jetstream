@@ -1,0 +1,295 @@
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
+@import "footer";
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.2s;
+}
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+    transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+    transition: all 0.2s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateY(-10px);
+    opacity: 0;
+}
+
+main {
+    overflow-x: hidden;
+}
+
+.navbar-item img {
+    width: 220px;
+}
+
+.no-width {
+    width: inherit !important;
+}
+
+.section.section--main {
+    padding: 0;
+}
+
+$min-menu-width: 240px;
+.main-navigation {
+    background-color: $primary;
+    min-height: calc(100vh - 56px - 131px); //56px is navbar and 131px is footer
+    max-height: 10000px;
+    width: $min-menu-width !important;
+}
+
+@media (min-width: 769px) {
+    .main-column {
+        width: calc(100% - #{$min-menu-width});
+        overflow: auto;
+    }
+}
+
+.menu-list li a,
+.submenu li a,
+.navbar-menu--collapsing a.navbar-item {
+    color: #fff;
+}
+
+.navbar-menu--collapsing {
+    a.navbar-item:hover {
+        color: #363663;
+        background-color: #fafafa;
+    }
+}
+
+.navbar-menu--collapsing {
+    background-color: $primary;
+}
+
+.navbar-menu {
+    display: block;
+    padding: 0;
+    opacity: 0;
+    max-height: 0px;
+    transition: all 0.2s ease-out;
+    pointer-events: none;
+    &__padding {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+}
+
+.navbar-menu.is-active {
+    opacity: 1;
+    max-height: 10000px;
+    transition: all 0.2s ease-in;
+    pointer-events: auto;
+}
+
+.buttons--padding-right {
+    padding-right: 12px;
+}
+
+// Make buttons class work with buefy tooltips
+.buttons .b-tooltip:not(:last-child):not(.is-fullwidth) {
+    margin-right: 0.5rem;
+}
+
+// .b-tooltip:after {
+//     white-space: pre;
+// }
+
+@include desktop {
+    .navbar-item {
+        &.is-hoverable:hover {
+            .navbar-dropdown {
+                display: block;
+            }
+        }
+    }
+}
+
+// .card-content span.is-right {
+//     // display: none;
+// }
+
+.navbar.is-primary .navbar-brand > a.navbar-item:hover {
+    background-color: transparent;
+}
+
+.welcome {
+    padding-top: 10%;
+    font-weight: 300;
+    span {
+        color: white;
+        font-weight: 700;
+        font-size: 4rem;
+        letter-spacing: -1px;
+        a {
+            color: white;
+            transition-duration: 0.2s;
+            &:hover {
+                color: #e4e4e4;
+            }
+        }
+    }
+}
+
+.control {
+    clear: none; // Fix weird bug
+}
+
+.input:required {
+    border-color: $primary;
+}
+.input:required:valid,
+.touched.input:optional:valid {
+    border-color: $success;
+}
+.touched.input:invalid,
+.touched.input.is-danger {
+    border-color: $danger;
+}
+
+.text-line {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid $grey-lighter;
+    line-height: 0.1em;
+    margin: 10px 0 20px;
+}
+
+.text-line span {
+    background: #fff;
+    padding: 0 16px;
+}
+
+.is-size-6-5 {
+    font-size: 0.88rem;
+}
+
+.has-no-padding-top {
+    padding-top: 0 !important;
+}
+.has-padding-top-1 {
+    padding-top: 4rem !important;
+}
+.has-padding-top-2 {
+    padding-top: 1.5rem !important;
+}
+.has-padding-bottom {
+    padding-bottom: 1.5rem;
+}
+.has-padding {
+    padding: 1.5rem;
+}
+.has-margin-auto {
+    margin: auto;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.card-content.form {
+    position: relative;
+}
+
+.has-no-border-bottom {
+    border-bottom: none !important;
+}
+
+mark {
+    padding: 0;
+    background: transparent;
+    background: linear-gradient(to right, $orange 50%, transparent 50%);
+    background-position: right bottom;
+    background-size: 200% 100%;
+    transition: all 0.5s ease;
+}
+
+mark.animate {
+    background-position: left bottom;
+}
+
+.table-fixed {
+    table-layout: fixed;
+}
+
+.table-fixed table {
+    table-layout: fixed;
+}
+
+.is-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.is-vtextbottom {
+    vertical-align: text-bottom;
+}
+
+.is-vertical-center {
+    display: flex;
+    align-items: center;
+}
+
+.has-full-height {
+    height: 100%;
+}
+
+.has-full-width {
+    width: 100%;
+}
+
+.columns.is-vertical {
+    flex-direction: column;
+}
+
+.chart-overflow {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.timeline .timeline-item {
+    padding-bottom: 1.5em;
+}
+
+.btn-static-size {
+    width: 190px;
+}
+
+@media (min-width: 1024px) {
+    .top-right {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+}
+
+.important .media-content {
+    text-align: center;
+}
+
+.required-star {
+    position: relative;
+    top: -2px;
+}
+
+.linked-service-number {
+    position: relative;
+    top: -6px;
+    left: -7px;
+    font-size: 0.8em;
+}

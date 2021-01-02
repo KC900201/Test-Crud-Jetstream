@@ -1,0 +1,41 @@
+// .footer.fixed {
+//     bottom: 0;
+//     left: 0;
+//     position: fixed;
+//     right: 0;
+//     z-index: 30;
+// }
+
+// Keeps footer at bottom but adjusts to content - Source - https://tinyurl.com/u25yqtp
+.flex-wrapper {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-between
+}
+// End of source
+
+.language-buttons {
+    button {
+        padding: 0;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        outline: none;
+        transition-duration: .1s;
+        border: 1px solid #d8d8d8;
+        &:focus {
+            box-shadow: 0 0 3pt 2pt $primary;
+        }
+        &:active {
+            border-style: solid;
+        }
+        img {
+            width: 50px;
+            height: auto;
+        }
+        &:first-child {
+            margin-right: 20px;
+        }
+    }
+}

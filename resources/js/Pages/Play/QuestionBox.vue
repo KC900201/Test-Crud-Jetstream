@@ -1,0 +1,142 @@
+<template>
+  <div class="question-box-container">
+    <h1>Question Box</h1>
+
+    <nav class="level">
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Fanzy Quiz App</p>
+          <p class="title">Counter: {{ numCorrect }}/{{ numTotal }}</p>
+        </div>
+      </div>
+    </nav>
+    <section class="hero is-medium is-primary is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            {{ currentQuestion.question }}
+          </h1>
+          <!-- <h2 class="subtitle">List of answers</h2> -->
+          <div class="panel list-group">
+            <a
+              class="panel-block list-group-item centered"
+              v-for="(answer, index) in answers"
+              :key="index"
+              @click.prevent="boom(index)"
+              :class="[selectedIndex === index ? 'selected' : '']"
+            >
+              {{ answer }}
+            </a>
+          </div>
+          <br />
+          <b-button rounded type="is-primary" @click="submitAnswer"
+            >Submit</b-button
+          >
+          <b-button rounded type="is-white" @click="prev" href="#"
+            >Previous</b-button
+          >
+          <b-button rounded type="is-black" @click="next" href="#"
+            >Next</b-button
+          >
+        </div>
+      </div>
+    </section>
+  </div>
+</template>
+
+<script>
+// import _ from "lodash";
+
+export default {
+  props: {
+    currentQuestion: Object,
+    next: Function,
+    prev: Function,
+    increment: Function,
+  },
+  props: ["numCorrect", "numTotal"],
+  computed: {
+    answers() {
+      let answers = [...this.currentQuestion.incorrect_answers];
+      answers.push(this.currentQuestion.correct_answer);
+      return answers;
+    },
+  },
+  mounted() {
+    console.log(this.currentQuestion);
+    console.log(this.shuffledAnswers);
+    this.boom();
+  },
+  data() {
+    return {
+      selectedIndex: null,
+      shuffledAnswers: [],
+    };
+  },
+  methods: {
+    boom(index) {
+      this.selectedIndex = index;
+      //   alert('Jibaboom ' + this.selectedIndex);
+    },
+    shuffleAnswers() {
+      let answers = [
+        ...this.currentQuestion.incorrect_answers,
+        this.currentQuestion.correct_answer,
+      ];
+      this.shuffledAnswers = _.shuffle(answers);
+    },
+    submitAnswer() {
+      let isCorrect = false;
+
+      if (this.selectedIndex === this.correctIndex) {
+        isCorrect = true;
+      }
+
+      this.increment(isCorrect);
+    },
+  },
+  watch: {
+    currentQuestion: {
+      immediate: true,
+      handler() {
+        this.selectedIndex = null;
+        this.shuffleAnswers();
+      },
+    },
+
+    // {
+    //   this.selectedIndex = null;
+    //   this.shuffleAnswers();
+    // },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.list-group {
+  margin-bottom: 10px;
+}
+
+.list-group-item {
+  margin: 0 5px;
+}
+
+.list-group-item:hover {
+  background: #eee;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.selected {
+  background-color: lightblue;
+}
+
+.correct {
+  background-color: lightgreen;
+}
+
+.incorrect {
+  background-color: rgb(189, 60, 37);
+}
+</style>

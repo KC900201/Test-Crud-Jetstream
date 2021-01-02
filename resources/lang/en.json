@@ -1,0 +1,24 @@
+{
+    "login": "Login",
+    "register": "Register",
+    "name": "Name",
+    "user_name": "Username",
+    "Laravel": "Laravel",
+    "email": "Email",
+    "password": "Password",
+    "password_confirm": "Confirm Password",
+    "submit": "Submit",
+    "nav": {
+        "home": "Home",
+        "about": "About",
+        "contact": "Contact Us"
+    },
+    "contact": {
+        "title": "Contact Us",
+        "subject": "Subject",
+        "message": "Message"
+    },
+    "about": {
+
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "login": "ログイン",
+    "register": "登録",
+    "name": "姓名",
+    "user_name": "ユーザーネーム",
+    "Laravel": "ららべると",
+    "email": "メルアドレス",
+    "password": "パスワード",
+    "password_confirm": "パスワード確認",
+    "submit": "差し出す",
+    "nav": {
+        "home": "ホームページ",
+        "about": "について",
+        "contact": "連絡"
+    },
+    "contact": {
+        "title": "連絡",
+        "subject": "サブジェクト",
+        "message": "メッセージ"
+    },
+    "about": {
+
+    }
+}
