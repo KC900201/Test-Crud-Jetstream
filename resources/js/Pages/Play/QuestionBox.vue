@@ -18,12 +18,21 @@
           </h1>
           <h2 class="subtitle">List of answers</h2>
           <div class="panel list-group">
+            <!--Changed answers to shuffledAnswers in answer choice, for better shuffling-->
             <a
               class="panel-block list-group-item centered"
-              v-for="(answer, index) in answers"
+              v-for="(answer, index) in shuffledAnswers"
               :key="index"
               @click.prevent="boom(index)"
-              :class="[selectedIndex === index ? 'selected' : '']"
+              :class="[
+                !answered && selectedIndex === index
+                  ? 'selected'
+                  : answered && correctIndex === index
+                  ? 'correct'
+                  : answered && selectedIndex === index && correctIndex !== index
+                  ? 'incorrect'
+                  : '',
+              ]"
             >
               {{ answer }}
             </a>
@@ -33,7 +42,7 @@
             rounded
             type="is-primary"
             @click="submitAnswer"
-            :disabled="isDisabled"
+            :disabled="selectedIndex === null || answered"
             >Submit</b-button
           >
           <b-button rounded type="is-white" @click="prev">Previous</b-button>
@@ -56,6 +65,16 @@ export default {
     numCorrect: Number,
     numTotal: Number,
   },
+  watch: {
+    currentQuestion: {
+      immediate: true,
+      handler() {
+        this.selectedIndex = null;
+        this.answered = false;
+        this.shuffleAnswers();
+      },
+    },
+  },
   computed: {
     answers() {
       let answers = [...this.currentQuestion.incorrect_answers];
@@ -73,6 +92,8 @@ export default {
   data() {
     return {
       selectedIndex: null,
+      correctIndex: null,
+      answered: false,
       shuffledAnswers: [],
     };
   },
@@ -87,9 +108,9 @@ export default {
         this.currentQuestion.correct_answer,
       ];
       this.shuffledAnswers = this._.shuffle(answers);
-    },
-    isDisabled() {
-      return this.selectedIndex === null ? false : true;
+      this.correctIndex = this.shuffledAnswers.indexOf(
+        this.currentQuestion.correct_answer
+      );
     },
     submitAnswer() {
       let isCorrect = false;
@@ -98,22 +119,10 @@ export default {
         isCorrect = true;
       }
 
+      this.answered = true;
+
       this.increment(isCorrect);
     },
-  },
-  watch: {
-    currentQuestion: {
-      immediate: true,
-      handler() {
-        this.selectedIndex = null;
-        this.shuffleAnswers();
-      },
-    },
-
-    // {
-    //   this.selectedIndex = null;
-    //   this.shuffleAnswers();
-    // },
   },
 };
 </script>

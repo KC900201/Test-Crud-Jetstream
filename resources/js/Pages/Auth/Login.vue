@@ -73,6 +73,7 @@
 <script>
 import Navbar from "../Shared/Navbar.vue";
 import AppFooter from  "../Shared/AppFooter.vue";
+import route from "ziggy-js";
 
 export default {
     props: ["errors"],
