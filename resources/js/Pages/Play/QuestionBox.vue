@@ -24,15 +24,7 @@
               v-for="(answer, index) in shuffledAnswers"
               :key="index"
               @click.prevent="boom(index)"
-              :class="[
-                !answered && selectedIndex === index
-                  ? 'selected'
-                  : answered && correctIndex === index
-                  ? 'correct'
-                  : answered && selectedIndex === index && correctIndex !== index
-                  ? 'incorrect'
-                  : '',
-              ]"
+              :class="answerClass(index)"
             >
               {{ answer }}
             </a>
@@ -83,19 +75,7 @@ export default {
     },
   },
   mounted() {
-    console.log("current questions: ");
-    console.log(this.currentQuestion);
-    console.log("shuffled answers: ");
-    console.log(this.shuffledAnswers);
     this.boom();
-  },
-  data() {
-    return {
-      selectedIndex: null,
-      correctIndex: null,
-      answered: false,
-      shuffledAnswers: [],
-    };
   },
   methods: {
     boom(index) {
@@ -123,6 +103,25 @@ export default {
 
       this.increment(isCorrect);
     },
+    answerClass(index) {
+      return !this.answered && this.selectedIndex === index
+        ? "selected"
+        : this.answered && this.correctIndex === index
+        ? "correct"
+        : this.answered &&
+          this.selectedIndex === index &&
+          this.correctIndex !== index
+        ? "incorrect"
+        : "";
+    },
+  },
+  data() {
+    return {
+      selectedIndex: null,
+      correctIndex: null,
+      answered: false,
+      shuffledAnswers: [],
+    };
   },
 };
 </script>
