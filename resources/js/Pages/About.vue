@@ -26,9 +26,9 @@
   </div>
 </template>
 <script>
-import Navbar from "./Shared/Navbar.vue";
-import AppFooter from "./Shared/AppFooter.vue";
-import QuestionBox from "./Play/QuestionBox.vue";
+import Navbar from "./Shared/Navbar";
+import AppFooter from "./Shared/AppFooter";
+import QuestionBox from "./Play/QuestionBox";
 
 export default {
   computed: {},

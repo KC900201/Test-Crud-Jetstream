@@ -15,8 +15,8 @@ use App\Http\Controllers\UserController;
 |
 */
 
-// Route::redirect('/', '/en');
-Route::redirect('/', '/ja');
+Route::redirect('/', '/en');
+// Route::redirect('/', '/ja');
 
 Route::group(['prefix' => '{language}'], function(){
 

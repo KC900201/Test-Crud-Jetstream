@@ -6,22 +6,25 @@
       <div class="level-item">
         <div class="card-header" card-radius="1rem">
           <article class="panel is-primary" style="width: 450px; padding: 20px">
-            <p class="panel-heading">{{ $t('register') }}</p>
+            <p class="panel-heading">{{ $t("register") }}</p>
             <form id="user_form" @submit.prevent="createUser">
               <section style="margin-top: 25px; margin-bottom: 25px">
-                <b-field :label="$t('name')"
+                <b-field
+                  :label="$t('name')"
                   :type="errors.name ? 'is-warning' : ''"
                   :message="errors.name"
                 >
                   <b-input v-model="form.name" required> </b-input>
                 </b-field>
-                <b-field :label="$t('user_name')"
+                <b-field
+                  :label="$t('user_name')"
                   :type="errors.username ? 'is-warning' : ''"
                   :message="errors.username"
                 >
                   <b-input v-model="form.username" required> </b-input>
                 </b-field>
-                <b-field :label="$t('email')"
+                <b-field
+                  :label="$t('email')"
                   :type="errors.email ? 'is-warning' : ''"
                   :message="errors.email"
                 >
@@ -69,7 +72,7 @@
                   style="margin-top: 25px"
                   :disabled="isLoading"
                 >
-                  {{ $t('submit') }}
+                  {{ $t("submit") }}
                 </button>
               </section>
             </form>
@@ -81,10 +84,10 @@
     <AppFooter />
   </div>
 </template>
+
 <script>
-import Navbar from "../Shared/Navbar.vue";
-import AppFooter from  "../Shared/AppFooter.vue";
-import route from "ziggy-js";
+import Navbar from "../Shared/Navbar";
+import AppFooter from "../Shared/AppFooter";
 
 export default {
   props: ["errors"],
@@ -92,10 +95,10 @@ export default {
 
   components: {
     Navbar,
-    AppFooter
+    AppFooter,
   },
   remember: {
-    data: ['form'],
+    data: ["form"],
   },
   data() {
     return {
@@ -116,14 +119,19 @@ export default {
     createUser() {
       // this.$inertia.post(route("users.store"), this.form).then(() => {});
       this.$inertia
-        .visit(route("register"), { method: "post", data: this.form, replace: true, preserveState: true })
+        .visit(route("register"), {
+          method: "post",
+          data: this.form,
+          replace: true,
+          preserveState: true,
+        })
         .then(() => {});
     },
     validateField() {
       // const checkEmail = /\S+@\S+\.\S+/.test(this.form.email)
       // console.log(">>>>>>>>>>>>>>>>>", this.form.email,  checkEmail)
       console.log("------------>>>", this.user);
-      if (this.form.password.length > 3) {
+      if (this.form.password.length >= 6) {
         this.validate = true;
       }
     },
