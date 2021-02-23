@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Laravel\Fortify\Fortify;
+
 class UserController extends Controller
 {
     /**
@@ -64,7 +65,7 @@ class UserController extends Controller
     /**
      * Authenticate user credentials in login page
      * and redirect to dashboard page
-    */
+     */
     public function login(Request $request)
     {
         // Authenticate user
@@ -98,7 +99,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return Inertia::render("Users/Form", ['user' => $user]);
     }
 
     /**
